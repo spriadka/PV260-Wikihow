@@ -1,1 +1,7 @@
-WikihowTest.class
+cz/muni/fi/wikihowtest/pageobject/SiteMapPage.class
+cz/muni/fi/wikihowtest/pageobject/SearchComponent.class
+cz/muni/fi/wikihowtest/TestSiteMap.class
+cz/muni/fi/wikihowtest/pageobject/RandomArticlePage.class
+cz/muni/fi/wikihowtest/pageobject/SearchResultsPage.class
+cz/muni/fi/wikihowtest/pageobject/PageObject.class
+cz/muni/fi/wikihowtest/pageobject/MainPage.class

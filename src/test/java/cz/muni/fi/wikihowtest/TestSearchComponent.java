@@ -1,8 +1,9 @@
 package cz.muni.fi.wikihowtest;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import cz.muni.fi.wikihowtest.pageobject.MainPage;
+import cz.muni.fi.wikihowtest.pageobject.SearchComponent;
+import cz.muni.fi.wikihowtest.pageobject.SearchResultsPage;
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,32 +11,39 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestSearchComponent {
-    private WebDriver driver;
-    private String baseUrl;
+    private static WebDriver driver;
+    private static MainPage mainPage;
+    private static SearchComponent searchComponent;
+    private static SearchResultsPage resultsPage;
+    private static String baseUrl;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         driver = new FirefoxDriver();
         baseUrl = "http://www.wikihow.com/";
+        mainPage = new MainPage(driver);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @Test
     public void testSearchComponent() throws Exception {
         driver.get(baseUrl + "/Main-Page");
-        driver.findElement(By.name("search")).click();
-        driver.findElement(By.name("search")).clear();
-        driver.findElement(By.name("search")).sendKeys("windows");
-        driver.findElement(By.id("search_site_bubble")).click();
-        assertEquals("windows", driver.findElement(By.name("search")).getAttribute("value"));
-        assertEquals(10, driver.findElements(By.xpath("//div[@id='searchresults_list']/div[contains(@class, 'result')]")).size());
+        searchComponent = mainPage.getSearchComponent();
+        assertTrue("Search bar is displayed",searchComponent.isInitialized());
+        searchComponent.click();
+        searchComponent.clear();
+        searchComponent.typeText("windows");
+        assertEquals("windows", searchComponent.getValue());
+        resultsPage = searchComponent.submit();
+        assertEquals(10, resultsPage.getResultsCount());
     }
 
-    @After
-    public void tearDown() throws Exception {
-        driver.quit();
+    @AfterClass
+    public static void tearDown() throws Exception {
+        driver.close();
     }
 
 }
