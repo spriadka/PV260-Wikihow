@@ -2,9 +2,9 @@ package cz.muni.fi.wikihowtest;
 
 import cz.muni.fi.wikihowtest.pageobject.MainPage;
 import cz.muni.fi.wikihowtest.pageobject.RandomArticlePage;
-import org.junit.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -26,17 +26,17 @@ public class TestRandomArticle {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    @AfterClass
+    public static void tearDown() throws Exception {
+        driver.close();
+    }
+
     @Test
     public void testRandomArticle() throws Exception {
         driver.get(baseUrl + "/Main-Page");
         randomArticlePage = mainPage.getRandomArticlePage();
-        assertTrue("Random article should contain steps",randomArticlePage.containsSteps());
-        assertTrue("Random article should contain header",randomArticlePage.containsArticleHeader());
-    }
-
-    @AfterClass
-    public static void tearDown() throws Exception {
-        driver.close();
+        assertTrue("Random article should contain steps", randomArticlePage.containsSteps());
+        assertTrue("Random article should contain header", randomArticlePage.containsArticleHeader());
     }
 
 }

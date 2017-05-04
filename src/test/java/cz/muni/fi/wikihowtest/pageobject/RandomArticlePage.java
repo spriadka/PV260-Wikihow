@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by spriadka on 5/3/17.
  */
-public class RandomArticlePage extends PageObject{
+public class RandomArticlePage extends PageObject {
 
     @FindBy(id = "article_info_header")
     private WebElement articleHeader;
@@ -19,11 +19,11 @@ public class RandomArticlePage extends PageObject{
         super(driver);
     }
 
-    public boolean containsArticleHeader(){
+    public boolean containsArticleHeader() {
         return articleHeader.isDisplayed();
     }
 
-    public boolean containsSteps(){
+    public boolean containsSteps() {
         return stepElement.isDisplayed();
     }
 }

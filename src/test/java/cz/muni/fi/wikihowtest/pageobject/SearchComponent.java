@@ -17,27 +17,27 @@ public class SearchComponent extends PageObject {
         super(driver);
     }
 
-    public void click(){
+    public void click() {
         searchElement.click();
     }
 
-    public void clear(){
+    public void clear() {
         searchElement.clear();
     }
 
-    public void typeText(String textToType){
+    public void typeText(String textToType) {
         searchElement.sendKeys(textToType);
     }
 
-    public String getValue(){
+    public String getValue() {
         return searchElement.getAttribute("value");
     }
 
-    public boolean isInitialized(){
+    public boolean isInitialized() {
         return searchElement.isDisplayed() && searchBubbleElement.isDisplayed();
     }
 
-    public SearchResultsPage submit(){
+    public SearchResultsPage submit() {
         searchBubbleElement.click();
         return new SearchResultsPage(driver);
     }

@@ -3,8 +3,9 @@ package cz.muni.fi.wikihowtest;
 import cz.muni.fi.wikihowtest.pageobject.MainPage;
 import cz.muni.fi.wikihowtest.pageobject.SearchComponent;
 import cz.muni.fi.wikihowtest.pageobject.SearchResultsPage;
-import org.junit.*;
-import org.openqa.selenium.By;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -28,22 +29,22 @@ public class TestSearchComponent {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    @AfterClass
+    public static void tearDown() throws Exception {
+        driver.close();
+    }
+
     @Test
     public void testSearchComponent() throws Exception {
         driver.get(baseUrl + "/Main-Page");
         searchComponent = mainPage.getSearchComponent();
-        assertTrue("Search bar is displayed",searchComponent.isInitialized());
+        assertTrue("Search bar is displayed", searchComponent.isInitialized());
         searchComponent.click();
         searchComponent.clear();
         searchComponent.typeText("windows");
         assertEquals("windows", searchComponent.getValue());
         resultsPage = searchComponent.submit();
         assertEquals(10, resultsPage.getResultsCount());
-    }
-
-    @AfterClass
-    public static void tearDown() throws Exception {
-        driver.close();
     }
 
 }

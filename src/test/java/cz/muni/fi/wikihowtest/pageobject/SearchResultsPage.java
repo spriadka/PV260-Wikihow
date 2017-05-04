@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by spriadka on 5/3/17.
  */
-public class SearchResultsPage extends PageObject{
+public class SearchResultsPage extends PageObject {
 
     @FindBy(className = "result")
     private List<WebElement> resultElements;
@@ -19,7 +19,7 @@ public class SearchResultsPage extends PageObject{
     }
 
 
-    public int getResultsCount(){
+    public int getResultsCount() {
         return resultElements.size();
     }
 
